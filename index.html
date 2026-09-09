@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz: Il Trionfo della Divina Provvidenza</title>
+  <title>Quiz: Barocco e Rococò</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lato:wght@400;700&display=swap');
-
+    /* Reset e Stili Generali */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -14,11 +13,9 @@
     }
 
     body {
-      background-color: #0f172a; /* Blu scuro notturno */
-      background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px);
-      background-size: 32px 32px;
-      font-family: 'Lato', sans-serif;
-      color: #1e293b;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f4f0;
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,34 +23,58 @@
       padding: 20px;
     }
 
+    /* Contenitore Principale */
     .quiz-container {
-      background: #fcfbf7; /* Avorio caldo */
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       width: 100%;
       max-width: 650px;
-      border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-      padding: 40px;
-      border-top: 6px solid #b8860b; /* Oro barocco */
     }
 
-    h1 {
-      font-family: 'Cinzel', serif;
+    /* Intestazione */
+    .quiz-header {
       text-align: center;
-      color: #1b2a4a;
-      font-size: 24px;
       margin-bottom: 30px;
-      border-bottom: 2px solid #e2e8f0;
-      padding-bottom: 15px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eaeaea;
     }
 
+    .quiz-header h1 {
+      font-family: 'Georgia', serif;
+      color: #2c3e50;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .quiz-header p {
+      color: #7f8c8d;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Testo Introduttivo */
+    .intro-text {
+      text-align: center;
+      color: #4a5568;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* Domanda */
     #question {
+      font-family: 'Georgia', serif;
       font-size: 20px;
-      font-weight: 700;
-      color: #1b2a4a;
+      color: #2c3e50;
       margin-bottom: 25px;
       line-height: 1.4;
+      text-align: center;
     }
 
+    /* Pulsanti delle Risposte e d'Azione */
     .btn-grid {
       display: flex;
       flex-direction: column;
@@ -62,118 +83,119 @@
 
     .btn {
       background-color: #ffffff;
-      border: 2px solid #cbd5e1;
+      border: 2px solid #e2e8f0;
+      color: #4a5568;
       border-radius: 8px;
-      padding: 15px 20px;
+      padding: 16px 20px;
       font-size: 16px;
-      color: #334155;
       cursor: pointer;
       text-align: left;
-      font-family: 'Lato', sans-serif;
-      transition: all 0.3s ease;
-      position: relative;
+      transition: all 0.2s ease;
+      font-weight: 500;
     }
 
-    .btn:hover:not([disabled]) {
-      background-color: #f8fafc;
-      border-color: #b8860b;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    .btn:hover:not(:disabled) {
+      border-color: #cda434;
+      background-color: #fcfbf7;
+      color: #2c3e50;
     }
 
     .btn:disabled {
       cursor: not-allowed;
     }
 
-    /* Colori per le risposte esatte e sbagliate */
+    /* Stati Risposta */
     .btn.correct {
-      background-color: #d4edda;
-      border-color: #28a745;
-      color: #155724;
-      font-weight: 700;
+      background-color: #f0fdf4;
+      border-color: #22c55e;
+      color: #166534;
     }
 
     .btn.wrong {
-      background-color: #f8d7da;
-      border-color: #dc3545;
-      color: #721c24;
+      background-color: #fef2f2;
+      border-color: #ef4444;
+      color: #991b1b;
     }
 
-    /* Box Spiegazione */
+    /* Box Spiegazione Errore */
     #explanation-box {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
+      margin-top: 25px;
+      padding: 16px 20px;
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      border-radius: 0 8px 8px 0;
       font-size: 15px;
       line-height: 1.5;
-      display: none; /* Nascosto di default */
+      color: #92400e;
+      display: none;
+      animation: fadeIn 0.4s ease;
     }
 
-    #explanation-box.show {
+    #explanation-box strong {
       display: block;
-      animation: fadeIn 0.5s;
+      margin-bottom: 5px;
+      color: #b45309;
     }
 
-    #explanation-box.error-theme {
-      background-color: #fff3f3;
-      border-left: 5px solid #dc3545;
-      color: #491217;
-    }
-
-    #explanation-box.success-theme {
-      background-color: #f0fdf4;
-      border-left: 5px solid #28a745;
-      color: #14532d;
-    }
-
-    /* Pulsante Avanti / Ricomincia */
-    .controls {
-      display: flex;
-      justify-content: flex-end;
+    /* Pulsanti di Controllo */
+    .action-btn {
       margin-top: 25px;
-    }
-
-    #next-btn, #restart-btn {
-      background-color: #1b2a4a;
-      color: #f3e5ab;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
       border: none;
-      padding: 12px 25px;
+      padding: 16px;
       font-size: 16px;
-      font-weight: 700;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      font-family: 'Cinzel', serif;
-      letter-spacing: 1px;
-      transition: background-color 0.3s;
+      transition: background 0.2s;
+      font-weight: bold;
     }
 
-    #next-btn:hover, #restart-btn:hover {
-      background-color: #2a3d66;
+    .action-btn:hover {
+      background-color: #1a252f;
+    }
+
+    .restart-btn {
+      background-color: #cda434;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+      margin-top: 20px;
+    }
+
+    .restart-btn:hover {
+      background-color: #b38f2d;
+    }
+
+    /* Schermata Risultati */
+    #score-container {
+      text-align: center;
+    }
+
+    #score-container h2 {
+      font-family: 'Georgia', serif;
+      font-size: 28px;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    #score-container p {
+      font-size: 18px;
+      color: #4a5568;
     }
 
     .hide {
       display: none !important;
     }
 
-    /* Schermata finale */
-    #score-container {
-      text-align: center;
-    }
-
-    #score-container h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 32px;
-      color: #b8860b;
-      margin-bottom: 15px;
-    }
-
-    #score-text {
-      font-size: 18px;
-      margin-bottom: 25px;
-      color: #475569;
-    }
-
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
+      from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -181,120 +203,177 @@
 <body>
 
   <div class="quiz-container">
-    <h1 id="quiz-title">Quiz: Trionfo della Divina Provvidenza</h1>
     
-    <!-- Contenitore Domande -->
-    <div id="quiz">
-      <div id="question">Caricamento domanda...</div>
-      <div id="answer-buttons" class="btn-grid">
-        <!-- I pulsanti vengono iniettati qui da JS -->
+    <!-- Schermata di Inizio -->
+    <div id="start-screen">
+      <div class="quiz-header">
+        <h1>Quiz di Storia dell'Arte</h1>
+        <p>Barocco e Rococò</p>
       </div>
-      
-      <!-- Box Spiegazione Errori -->
-      <div id="explanation-box"></div>
-      
-      <div class="controls">
-        <button id="next-btn" class="hide">Prossima Domanda &rarr;</button>
-      </div>
+      <p class="intro-text">
+        Metti alla prova le tue conoscenze sulle sculture di <strong>Gian Lorenzo Bernini</strong> ed <strong>Edmé Bouchardon</strong>, e sul grande affresco di <strong>Pietro da Cortona</strong>.
+      </p>
+      <button class="action-btn" onclick="initQuiz()">Avvia Quiz</button>
     </div>
 
-    <!-- Contenitore Risultati Finali -->
+    <!-- Schermata Domande -->
+    <div id="quiz-screen" class="hide">
+      <div class="quiz-header">
+        <h1 id="artwork-author">Autore</h1>
+        <p id="artwork-title">Titolo dell'opera</p>
+      </div>
+
+      <h2 id="question">Caricamento domanda...</h2>
+      <div id="answer-buttons" class="btn-grid">
+        <!-- Generati dinamici via JS -->
+      </div>
+
+      <div id="explanation-box" class="hide">
+        <strong>Spiegazione:</strong>
+        <span id="explanation-text"></span>
+      </div>
+
+      <button id="next-btn" class="action-btn hide">Domanda Successiva</button>
+    </div>
+
+    <!-- Schermata Risultati -->
     <div id="score-container" class="hide">
       <h2>Quiz Completato!</h2>
       <p id="score-text"></p>
-      <button id="restart-btn">Ricomincia il Quiz</button>
+      <button class="restart-btn" onclick="resetToStart()">Ricomincia dall'Inizio</button>
     </div>
+
   </div>
 
   <script>
-    // Dati delle domande basati sulla conversazione
     const questions = [
+      // 1. GIAN LORENZO BERNINI - Il Ratto di Proserpina
       {
-        question: "Qual è la funzione principale della finta architettura (quadratura) dipinta nel capolavoro di Pietro da Cortona?",
+        author: "Gian Lorenzo Bernini",
+        title: "Il Ratto di Proserpina (1621-1622)",
+        question: "Cosa scatena sulla Terra il rapimento di Proserpina da parte del dio degli Inferi Plutone?",
         answers: [
-          { text: "Creare l'illusione di un soffitto spalancato verso un cielo infinito.", correct: true },
-          { text: "Separare rigidamente le diverse scene religiose come nel Rinascimento.", correct: false, explanation: "Cortona, al contrario del Rinascimento, annulla i confini rigidi (i 'quadri riportati') per creare uno spazio fluido e continuo." },
-          { text: "Sostenere il peso della volta in muratura per evitare crolli.", correct: false, explanation: "L'architettura dipinta è pura illusione ottica teatrale, non ha alcuna funzione strutturale fisica." },
-          { text: "Coprire degli errori architettonici originali del Palazzo Barberini.", correct: false, explanation: "L'affresco è un'opera di glorificazione pianificata sin dall'inizio, non un espediente di restauro." }
+          { text: "La dea Cere smette di far crescere la vegetazione, rischiando di causare una carestia.", correct: true },
+          { text: "Cerbero abbandona l'Oltretomba scatenando il panico tra gli umani.", correct: false, explanation: "La slide indica che Cerbero resta ai piedi delle figure a guardia dell'Oltretomba, mentre è la dea Cere a bloccare la vegetazione." },
+          { text: "Plutone viene immediatamente punito e costretto a restituire la giovane senza accordi.", correct: false, explanation: "Il testo della slide spiega che per evitare la carestia viene trovato un accordo: Proserpina passerà sei mesi negli Inferi e sei mesi con la madre." },
+          { text: "Proserpina viene trasformata in un albero per essere salvata dalla madre.", correct: false, explanation: "Secondo le slide, viene raggiunto un accordo temporale: sei mesi negli Inferi con Plutone e sei mesi sulla Terra con la madre Cere." }
         ]
       },
       {
-        question: "Cosa simboleggiano le tre gigantesche api dorate al centro della composizione?",
+        author: "Gian Lorenzo Bernini",
+        title: "Il Ratto di Proserpina (1621-1622)",
+        question: "Quale momento sceglie di scolpire Bernini e come è strutturata l'opera?",
         answers: [
-          { text: "Le virtù della castità e della povertà papale.", correct: false, explanation: "Le api non simboleggiano la povertà, ma l'operosità e soprattutto sono il preciso stemma araldico della famiglia Barberini." },
-          { text: "L'operosità e la purezza della casata di Papa Urbano VIII Barberini.", correct: true },
-          { text: "La sconfitta dell'eresia protestante in Europa.", correct: false, explanation: "La sconfitta dell'eresia è allegoricamente rappresentata nel riquadro in cui Minerva abbatte i Giganti." },
-          { text: "I tre continenti conosciuti all'epoca sottomessi alla Chiesa.", correct: false, explanation: "Le api sono esclusivamente il simbolo dinastico dei Barberini, non rappresentano entità geografiche in quest'opera." }
+          { text: "Scolpisce l'apice della storia, racchiudendo le figure in una struttura a spirale che spinge a ruotare attorno all'opera.", correct: true },
+          { text: "Rappresenta una scena statica in cui Proserpina raccoglie fiori in tranquillità.", correct: false, explanation: "La slide specifica che Bernini non sceglie un momento qualsiasi, ma l'apice della storia mentre Proserpina cerca disperatamente di liberarsi." },
+          { text: "Organizza la scultura su un unico piano frontale privo di morbidezza.", correct: false, explanation: "I personaggi sono racchiusi in una struttura a spirale per invitare lo spettatore a ruotare attorno alla statua, e il marmo mostra una morbidezza incredibile." },
+          { text: "Rappresenta l'accordo pacifico raggiunto tra la dea Cere e Plutone.", correct: false, explanation: "Bernini scolpisce l'apice drammatico del rapimento, dove le dita di Plutone sembrano affondare nel corpo di Proserpina." }
+        ]
+      },
+
+      // 2. EDMÉ BOUCHARDON - Cupido che fabbrica il suo arco
+      {
+        author: "Edmé Bouchardon",
+        title: "Cupido che fabbrica il suo arco (1750)",
+        question: "Cosa utilizza Cupido per fabbricare il suo arco e qual è il significato allegorico?",
+        answers: [
+          { text: "Usa la clava del forte Ercole, a significare che l'amore supera persino la forza maggiore.", correct: true },
+          { text: "Usa un ramo d'alloro per indicare il trionfo della gloria poetica.", correct: false, explanation: "La slide riporta espressamente che Cupido usa la clava del forte Ercole per simboleggiare la vittoria dell'amore sulla forza." },
+          { text: "Usa un fulmine sottratto a Giove per mostrare la sua potenza divina.", correct: false, explanation: "Il testo specifica che sta fabbricando l'arco usando la clava di Ercole." },
+          { text: "Usa una spada spezzata per simboleggiare la fine di ogni guerra.", correct: false, explanation: "L'attrezzo impiegato da Cupido è la clava del forte Ercole." }
         ]
       },
       {
-        question: "Nel settore 'Trionfo della Religione e Sapienza', quale vizio viene specificamente sconfitto dall'elevazione spirituale?",
+        author: "Edmé Bouchardon",
+        title: "Cupido che fabbrica il suo arco (1750)",
+        question: "Quale espressione e resa formale caratterizzano questa scultura rococò?",
         answers: [
-          { text: "L'eresia e la forza cieca dei Giganti.", correct: false, explanation: "I Giganti sono sconfitti da Minerva, non nel riquadro di Religione e Sapienza." },
-          { text: "Il tradimento e la codardia in guerra.", correct: false, explanation: "L'opera si concentra su vizi spirituali e carnali. La guerra è richiamata nel Trionfo della Pace." },
-          { text: "La cupidigia e le Arpie ladre.", correct: false, explanation: "Le Arpie, simbolo di avidità e cupidigia, vengono scacciate dalla virtù eroica di Ercole." },
-          { text: "La lussuria e le passioni carnali, simboleggiate dal Sileno ebbro.", correct: true }
+          { text: "Superfici lisce ed eleganti con un viso sereno e un leggero sorriso furbetto, in contrasto col dramma barocco.", correct: true },
+          { text: "Una forte espressività drammatica e un volto contorto dal dolore.", correct: false, explanation: "La slide evidenzia un viso sereno con un leggero sorriso furbetto, ponendolo in contrasto con la violenza del barocco." },
+          { text: "Una muscolatura contratta in tensione estrema per lo sforzo fisico.", correct: false, explanation: "Le superfici sono lisce ed eleganti, pensate per ricreare un senso di grazia, armonia e movimento morbido." },
+          { text: "Un volto severo e privo di emozioni per sottolineare la solitudine del personaggio.", correct: false, explanation: "Il testo della slide parla esplicitamente di un 'viso sereno e un leggero sorriso furbetto'." }
+        ]
+      },
+
+      // 3. PIETRO DA CORTONA - Il Trionfo della Divina Provvidenza
+      {
+        author: "Pietro da Cortona",
+        title: "Il Trionfo della Divina Provvidenza (1632-1639)",
+        question: "Quale tecnica prospettica utilizza Pietro da Cortona per superare i limiti dell'architettura reale?",
+        answers: [
+          { text: "Lo sfondamento prospettico illusionistico (quadratura).", correct: true },
+          { text: "La suddivisione in quadri riportati, separando nettamente le scene.", correct: false, explanation: "Pietro da Cortona supera la suddivisione in quadri riportati creando una finta architettura dipinta che si apre verso il cielo." },
+          { text: "L'uso di sfondi scuri privi di fonti luminose aperte.", correct: false, explanation: "L'opera è caratterizzata da una luce calda e dorata e da un'apertura verso un cielo infinito." },
+          { text: "La prospettiva lineare a punto di fuga unico centrale sul pavimento.", correct: false, explanation: "Cortona utilizza uno sfondamento prospettico con finta architettura in stucco dipinto che simula l'apertura della volta." }
         ]
       },
       {
-        question: "Come viene descritto l'uso della luce da parte di Pietro da Cortona in questo affresco?",
+        author: "Pietro da Cortona",
+        title: "Il Trionfo della Divina Provvidenza (1632-1639)",
+        question: "Cosa sorreggono le Virtù Teologali al centro della volta, incoronato dall'Immortalità?",
         answers: [
-          { text: "Fredda e geometrica per evidenziare i dettagli architettonici reali.", correct: false, explanation: "La luce barocca di Cortona è l'opposto: drammatica, calda e progettata per sciogliere l'architettura nella visione divina." },
-          { text: "Calda, drammatica e radiale, per esaltare i volumi e il dinamismo.", correct: true },
-          { text: "Quasi assente, predominano le ombre per creare mistero.", correct: false, explanation: "Al contrario, un trionfo dorato e radioso inonda la scena centrale dove siede la Divina Provvidenza." },
-          { text: "Proveniente unicamente dalle finestre reali del Salone Grande.", correct: false, explanation: "La luce dipinta è divina e teatrale: emana dal centro del dipinto in modo indipendente dalla luce fisica della stanza." }
+          { text: "Lo scudo papale di Urbano VIII Barberini con le tre api dorate.", correct: true },
+          { text: "Un busto celebrativo raffigurante Gian Lorenzo Bernini.", correct: false, explanation: "L'affresco glorifica il papato di Urbano VIII Barberini, il cui stemma reca tre api dorate." },
+          { text: "La clava di Ercole e le armi conquistate ai Giganti.", correct: false, explanation: "Al centro è raffigurato lo stemma della famiglia Barberini con le tre api cinto da alloro." },
+          { text: "Una rappresentazione allegorica dell'Oltretomba.", correct: false, explanation: "L'elemento centrale è lo stemma con le tre api dorate sorretto dalle Virtù Teologali." }
         ]
       },
       {
-        question: "Quale azione compie la personificazione della Pace nel suo settore dedicato?",
+        author: "Pietro da Cortona",
+        title: "Il Trionfo della Divina Provvidenza (1632-1639)",
+        question: "Nel riquadro del 'Trionfo della Religione e Sapienza', quali figure vengono scacciate?",
         answers: [
-          { text: "Chiude il tempio di Giano e incatena il Furore su una catasta d'armi.", correct: true },
-          { text: "Porge le chiavi di San Pietro a Papa Urbano VIII.", correct: false, explanation: "Le chiavi e la tiara papale si trovano nel registro centrale, presentate dalla dea Roma e dalla Religione." },
-          { text: "Scaglia i fulmini contro i nemici della Chiesa Barberini.", correct: false, explanation: "A scagliare fulmini contro chi insorge (i Giganti) è Minerva, figura della Sapienza divina." },
-          { text: "Incorona di alloro le tre api della famiglia Barberini.", correct: false, explanation: "A ordinare l'incoronazione delle api è la Divina Provvidenza, e l'azione materiale è eseguita dall'Immortalità." }
+          { text: "Il Sileno ebbro e la Lascivia.", correct: true },
+          { text: "I Giganti sbaragliati da Minerva.", correct: false, explanation: "I Giganti sono combattuti da Minerva in un altro settore per simboleggiare la sconfitta dell'eresia." },
+          { text: "Il Furore incatenato sopra un mucchio d'armi.", correct: false, explanation: "Il Furore viene incatenato nel settore del 'Trionfo della Pace'." },
+          { text: "Le Arpie scacciate dalla clava di Ercole.", correct: false, explanation: "Le Arpie vengono affrontate da Ercole nel scomparto dedicato alla virtù eroica." }
         ]
       }
     ];
 
+    const startScreen = document.getElementById("start-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const scoreContainer = document.getElementById("score-container");
+
+    const authorElement = document.getElementById("artwork-author");
+    const titleElement = document.getElementById("artwork-title");
     const questionElement = document.getElementById("question");
     const answerButtonsElement = document.getElementById("answer-buttons");
     const nextButton = document.getElementById("next-btn");
     const explanationBox = document.getElementById("explanation-box");
-    const scoreContainer = document.getElementById("score-container");
-    const quizContainer = document.getElementById("quiz");
+    const explanationText = document.getElementById("explanation-text");
     const scoreText = document.getElementById("score-text");
-    const restartButton = document.getElementById("restart-btn");
-    const quizTitle = document.getElementById("quiz-title");
 
     let currentQuestionIndex = 0;
     let score = 0;
 
-    function startQuiz() {
+    function initQuiz() {
+      startScreen.classList.add("hide");
+      scoreContainer.classList.add("hide");
+      quizScreen.classList.remove("hide");
       currentQuestionIndex = 0;
       score = 0;
-      scoreContainer.classList.add("hide");
-      quizContainer.classList.remove("hide");
-      quizTitle.classList.remove("hide");
       showQuestion();
     }
 
     function showQuestion() {
       resetState();
       let currentQuestion = questions[currentQuestionIndex];
-      questionElement.innerText = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+      
+      authorElement.innerText = currentQuestion.author;
+      titleElement.innerText = currentQuestion.title;
+      questionElement.innerText = currentQuestion.question;
 
       currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
         button.innerText = answer.text;
         button.classList.add("btn");
-        
-        // Salviamo se è giusta e la spiegazione come data-attribute
         if (answer.correct) {
           button.dataset.correct = answer.correct;
-        } else {
+        }
+        if (answer.explanation) {
           button.dataset.explanation = answer.explanation;
         }
-        
         button.addEventListener("click", selectAnswer);
         answerButtonsElement.appendChild(button);
       });
@@ -302,8 +381,7 @@
 
     function resetState() {
       nextButton.classList.add("hide");
-      explanationBox.classList.remove("show", "error-theme", "success-theme");
-      explanationBox.innerHTML = "";
+      explanationBox.classList.add("hide");
       while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild(answerButtonsElement.firstChild);
       }
@@ -313,61 +391,50 @@
       const selectedButton = e.target;
       const isCorrect = selectedButton.dataset.correct === "true";
 
-      // Logica dei colori e delle spiegazioni
-      if (isCorrect) {
-        selectedButton.classList.add("correct");
-        explanationBox.innerHTML = "<strong>Esatto!</strong> Ottima conoscenza dell'opera.";
-        explanationBox.classList.add("success-theme", "show");
-        score++;
-      } else {
-        selectedButton.classList.add("wrong");
-        const expText = selectedButton.dataset.explanation;
-        explanationBox.innerHTML = `<strong>Sbagliato!</strong><br>${expText}`;
-        explanationBox.classList.add("error-theme", "show");
-      }
-
-      // Rivela la risposta giusta e blocca gli altri pulsanti
       Array.from(answerButtonsElement.children).forEach(button => {
+        button.disabled = true;
         if (button.dataset.correct === "true") {
           button.classList.add("correct");
         }
-        button.disabled = true; // Impedisce altri click
       });
 
+      if (isCorrect) {
+        score++;
+      } else {
+        selectedButton.classList.add("wrong");
+        explanationText.innerText = selectedButton.dataset.explanation;
+        explanationBox.classList.remove("hide");
+      }
+
       nextButton.classList.remove("hide");
+      
+      if (questions.length === currentQuestionIndex + 1) {
+        nextButton.innerText = "Mostra Risultati";
+      } else {
+        nextButton.innerText = "Domanda Successiva";
+      }
     }
 
-    function handleNextButton() {
+    function showScore() {
+      quizScreen.classList.add("hide");
+      scoreContainer.classList.remove("hide");
+      scoreText.innerHTML = `Hai risposto correttamente a <strong>${score}</strong> domande su <strong>${questions.length}</strong>.`;
+    }
+
+    function resetToStart() {
+      scoreContainer.classList.add("hide");
+      quizScreen.classList.add("hide");
+      startScreen.classList.remove("hide");
+    }
+
+    nextButton.addEventListener("click", () => {
       currentQuestionIndex++;
       if (currentQuestionIndex < questions.length) {
         showQuestion();
       } else {
         showScore();
       }
-    }
-
-    function showScore() {
-      quizContainer.classList.add("hide");
-      quizTitle.classList.add("hide");
-      scoreContainer.classList.remove("hide");
-      
-      let message = "";
-      if (score === questions.length) {
-        message = "Perfetto! Sei un esperto di pittura barocca e propaganda Barberini.";
-      } else if (score >= questions.length / 2) {
-        message = "Buon risultato! Hai compreso i concetti chiave dell'affresco.";
-      } else {
-        message = "C'è ancora qualcosa da ripassare sulle illusioni di Pietro da Cortona!";
-      }
-
-      scoreText.innerHTML = `Hai risposto correttamente a <strong>${score} domande su ${questions.length}</strong>.<br><br>${message}`;
-    }
-
-    nextButton.addEventListener("click", handleNextButton);
-    restartButton.addEventListener("click", startQuiz);
-
-    // Avvia il quiz
-    startQuiz();
+    });
   </script>
 </body>
 </html>
