@@ -14,7 +14,7 @@
     }
 
     body {
-      background-color: #0f172a; /* Blu scuro notturno */
+      background-color: #0f172a; 
       background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px);
       background-size: 32px 32px;
       font-family: 'Lato', sans-serif;
@@ -27,13 +27,13 @@
     }
 
     .quiz-container {
-      background: #fcfbf7; /* Avorio caldo */
+      background: #fcfbf7; 
       width: 100%;
       max-width: 650px;
       border-radius: 12px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
       padding: 40px;
-      border-top: 6px solid #b8860b; /* Oro barocco */
+      border-top: 6px solid #b8860b; 
     }
 
     h1 {
@@ -84,7 +84,7 @@
       cursor: not-allowed;
     }
 
-    /* Colori per le risposte esatte e sbagliate */
+   
     .btn.correct {
       background-color: #d4edda;
       border-color: #28a745;
@@ -98,14 +98,14 @@
       color: #721c24;
     }
 
-    /* Box Spiegazione */
+    
     #explanation-box {
       margin-top: 20px;
       padding: 15px;
       border-radius: 8px;
       font-size: 15px;
       line-height: 1.5;
-      display: none; /* Nascosto di default */
+      display: none; 
     }
 
     #explanation-box.show {
@@ -125,7 +125,7 @@
       color: #14532d;
     }
 
-    /* Pulsanti Avanti / Ricomincia / Avvia */
+
     .controls {
       display: flex;
       justify-content: flex-end;
@@ -154,7 +154,7 @@
       display: none !important;
     }
 
-    /* Schermata iniziale e finale */
+   
     #start-container, #score-container {
       text-align: center;
     }
@@ -184,21 +184,21 @@
   <div class="quiz-container">
     <h1 id="quiz-title" class="hide">Quiz: Barocco e Rococò</h1>
 
-    <!-- Schermata di Inizio -->
+  
     <div id="start-container">
       <h2>Quiz interattivo</h2>
       <p>Mettiti alla prova con le domande sulle opere del Barocco e del Rococò della mostra</p>
       <button id="start-btn">Avvia Quiz</button>
     </div>
     
-    <!-- Contenitore Domande -->
+    
     <div id="quiz" class="hide">
       <div id="question">Caricamento domanda...</div>
       <div id="answer-buttons" class="btn-grid">
-        <!-- I pulsanti vengono iniettati qui da JS -->
+ 
       </div>
       
-      <!-- Box Spiegazione Errori -->
+     
       <div id="explanation-box"></div>
       
       <div class="controls">
@@ -206,7 +206,6 @@
       </div>
     </div>
 
-    <!-- Contenitore Risultati Finali -->
     <div id="score-container" class="hide">
       <h2>Quiz Completato!</h2>
       <p id="score-text"></p>
@@ -216,7 +215,7 @@
 
   <script>
     const questions = [
-      // --- SEZIONE 1: GIAN LORENZO BERNINI (Il Ratto di Proserpina) ---
+      
       {
         question: "Nel 'Ratto di Proserpina', quale momento preciso sceglie di scolpire Gian Lorenzo Bernini?",
         answers: [
@@ -245,7 +244,7 @@
         ]
       },
 
-      // --- SEZIONE 2: EDMÉ BOUCHARDON (Cupido che fabbrica il suo arco) ---
+      
       {
         question: "Nel capolavoro Rococò di Bouchardon, cosa usa Cupido per fabbricare il suo arco?",
         answers: [
@@ -265,7 +264,7 @@
         ]
       },
 
-      // --- SEZIONE 3: PIETRO DA CORTONA (Trionfo della Divina Provvidenza) ---
+      
       {
         question: "Qual è la funzione principale della finta architettura (quadratura) dipinta da Pietro da Cortona?",
         answers: [
@@ -349,10 +348,10 @@
   let currentQuestion = questions[currentQuestionIndex];
   questionElement.innerText = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
 
-  // Crea una copia delle risposte e le mescola casualmente
+  
   const shuffledAnswers = [...currentQuestion.answers].sort(() => Math.random() - 0.5);
 
-  // Genera i pulsanti usando la lista mescolata
+ 
   shuffledAnswers.forEach(answer => {
     const button = document.createElement("button");
     button.innerText = answer.text;
@@ -420,12 +419,10 @@
       
       let message = "";
       if (score === questions.length) {
-        message = "Eccellente! Conosci perfettamente tutte le opere del Barocco e del Rococò!";
+        message = "Eccellente! Conosci perfettamente tutte le opere della mostra sul Barocco e Rococò!";
       } else if (score >= questions.length / 2) {
-        message = "Ottimo lavoro! Hai una buona preparazione generale sulle opere stilistiche.";
-      } else {
-        message = "Serve un piccolo ripasso sulle slide prima del test finale!";
-      }
+        message = "Ottimo lavoro! Hai una buona preparazione generale sulle opere della mostra.";
+      } 
 
       scoreText.innerHTML = `Hai risposto correttamente a <strong>${score} domande su ${questions.length}</strong>.<br><br>${message}`;
     }
