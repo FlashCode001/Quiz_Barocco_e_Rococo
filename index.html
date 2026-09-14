@@ -84,7 +84,6 @@
       cursor: not-allowed;
     }
 
-   
     .btn.correct {
       background-color: #d4edda;
       border-color: #28a745;
@@ -98,7 +97,6 @@
       color: #721c24;
     }
 
-    
     #explanation-box {
       margin-top: 20px;
       padding: 15px;
@@ -124,7 +122,6 @@
       border-left: 5px solid #28a745;
       color: #14532d;
     }
-
 
     .controls {
       display: flex;
@@ -154,7 +151,6 @@
       display: none !important;
     }
 
-   
     #start-container, #score-container {
       text-align: center;
     }
@@ -184,21 +180,17 @@
   <div class="quiz-container">
     <h1 id="quiz-title" class="hide">Quiz: Barocco e Rococò</h1>
 
-  
     <div id="start-container">
       <h2>Quiz interattivo</h2>
       <p>Mettiti alla prova con le domande sulle opere del Barocco e del Rococò della mostra</p>
       <button id="start-btn">Avvia Quiz</button>
     </div>
     
-    
     <div id="quiz" class="hide">
       <div id="question">Caricamento domanda...</div>
       <div id="answer-buttons" class="btn-grid">
- 
       </div>
       
-     
       <div id="explanation-box"></div>
       
       <div class="controls">
@@ -215,7 +207,6 @@
 
   <script>
     const questions = [
-      
       {
         question: "Nel 'Ratto di Proserpina', quale momento preciso sceglie di scolpire Gian Lorenzo Bernini?",
         answers: [
@@ -243,8 +234,6 @@
           { text: "Una ghirlanda d'alloro simbolica.", correct: false, explanation: "È presente Cerbero a tre teste, posto lì per ricordare la destinazione di Proserpina negli Inferi." }
         ]
       },
-
-      
       {
         question: "Nel capolavoro Rococò di Bouchardon, cosa usa Cupido per fabbricare il suo arco?",
         answers: [
@@ -263,8 +252,6 @@
           { text: "Mostra uno sguardo d'ira rivolto verso Ercole.", correct: false, explanation: "Il viso è sereno e presenta un sorriso furbetto, tipico della grazia Rococò." }
         ]
       },
-
-      
       {
         question: "Qual è la funzione principale della finta architettura (quadratura) dipinta da Pietro da Cortona?",
         answers: [
@@ -309,6 +296,42 @@
           { text: "Scaglia i fulmini contro i nemici della Chiesa Barberini.", correct: false, explanation: "A scagliare fulmini contro chi insorge è Minerva, figura della Sapienza divina." },
           { text: "Incorona di alloro le tre api della famiglia Barberini.", correct: false, explanation: "A ordinare l'incoronazione delle api è la Divina Provvidenza, eseguita dall'Immortalità." }
         ]
+      },
+      {
+        question: "Come ottiene Francesco Borromini un senso di dinamismo nella facciata di \"San Carlo alle Quattro Fontane\"?",
+        answers: [
+          { text: "Attraverso l'alternanza tra superfici concave e convesse, dando quasi l'impressione che il muro si muova.", correct: true },
+          { text: "Utilizzando stucchi dorati e argentati per riflettere la luce.", correct: false, explanation: "Questa è una caratteristica del Rococò di Cuvilliés. Borromini usa superfici concave e convesse per creare il 'Movimento Plastico'." },
+          { text: "Inserendo decorazioni a forma di conchiglie e foglie.", correct: false, explanation: "Queste decorazioni sono caratteristiche del gusto rocaille. Il dinamismo in Borromini è dato dall'alternanza tra superfici concave e convesse." },
+          { text: "Organizzando lo spazio esclusivamente tramite quadrati perfetti.", correct: false, explanation: "Borromini organizza lo spazio attraverso una geometria complessa con ellissi e croci, non forme semplici o quadrate." }
+        ]
+      },
+      {
+        question: "In \"San Carlo alle Quattro Fontane\", come viene descritto il \"Chiaroscuro architettonico\"?",
+        answers: [
+          { text: "La luce naturale colpisce in modo diverso le varie superfici e crea forti contrasti tra luce e ombra, aumentando la profondità e l'effetto teatrale.", correct: true },
+          { text: "È un dipinto sulla facciata che simula luci e ombre in modo artificiale.", correct: false, explanation: "Il chiaroscuro è creato dalla vera luce naturale che colpisce le complesse superfici architettoniche per formare forti contrasti, non da un dipinto." },
+          { text: "La luce si moltiplica grazie a specchi che rendono l'ambiente luminosissimo.", correct: false, explanation: "L'uso degli specchi per moltiplicare la luce si trova nella Sala degli Specchi di Amalienburg. In Borromini la luce crea forti contrasti sulle superfici." },
+          { text: "Evita l'effetto teatrale mantenendo un'illuminazione costante e uniforme su tutta la struttura.", correct: false, explanation: "I forti contrasti tra luce e ombra sono pensati specificamente per aumentare la profondità e l'effetto teatrale, non per evitarli." }
+        ]
+      },
+      {
+        question: "Qual è lo scopo della \"Smaterializzazione\" nella \"Sala degli Specchi, Amalienburg\" di François de Cuvilliés?",
+        answers: [
+          { text: "Gli specchi e gli stucchi dorati e argentati rendono le pareti meno pesanti e fanno sembrare l'ambiente più ampio e quasi senza confini.", correct: true },
+          { text: "Organizzare lo spazio con geometrie complesse come ellissi e croci.", correct: false, explanation: "L'uso di geometrie complesse per organizzare lo spazio è tipico del Borromini. A Cuvilliés interessa rendere l'ambiente visivamente più ampio e senza confini." },
+          { text: "Creare forti contrasti tra luce e ombra per ottenere un effetto di profondità.", correct: false, explanation: "Il contrasto drammatico è tipico del Barocco di Borromini. Nella Sala degli Specchi, la luce viene riflessa e si moltiplica, rendendo la sala luminosa e leggera." },
+          { text: "Dare un marcato senso di solidità visiva, dando l'impressione che il muro si muova.", correct: false, explanation: "Lo scopo della smaterializzazione è l'esatto opposto: rendere le pareti meno pesanti e lo spazio quasi senza confini." }
+        ]
+      },
+      {
+        question: "Cosa caratterizza il \"Gusto rocaille\" all'interno della decorazione della Sala degli Specchi?",
+        answers: [
+          { text: "Superfici ricoperte da conchiglie, foglie, rami e forme curve che creano una decorazione molto elegante e ispirata alla natura.", correct: true },
+          { text: "L'uso di colonne, nicchie e rilievi disposti in modo preciso per guidare lo sguardo dello spettatore.", correct: false, explanation: "Questi elementi strutturali descrivono l'architettura Barocca di Borromini. Il gusto rocaille si basa su forme curve e naturali come foglie e rami." },
+          { text: "L'assenza totale di decorazioni ispirate alla natura per esaltare esclusivamente forme astratte.", correct: false, explanation: "Al contrario, il gusto rocaille ricopre le superfici proprio con elementi fortemente ispirati alla natura (conchiglie, rami, foglie)." },
+          { text: "Una decorazione cupa pensata per oscurare gli specchi.", correct: false, explanation: "La decorazione rocaille è elegante, raffinata e lavora insieme agli specchi e alla luce per creare uno spazio prezioso e leggero." }
+        ]
       }
     ];
 
@@ -344,29 +367,27 @@
     }
 
     function showQuestion() {
-  resetState();
-  let currentQuestion = questions[currentQuestionIndex];
-  questionElement.innerText = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+      resetState();
+      let currentQuestion = questions[currentQuestionIndex];
+      questionElement.innerText = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
 
-  
-  const shuffledAnswers = [...currentQuestion.answers].sort(() => Math.random() - 0.5);
+      const shuffledAnswers = [...currentQuestion.answers].sort(() => Math.random() - 0.5);
 
- 
-  shuffledAnswers.forEach(answer => {
-    const button = document.createElement("button");
-    button.innerText = answer.text;
-    button.classList.add("btn");
-    
-    if (answer.correct) {
-      button.dataset.correct = answer.correct;
-    } else {
-      button.dataset.explanation = answer.explanation;
+      shuffledAnswers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("btn");
+        
+        if (answer.correct) {
+          button.dataset.correct = answer.correct;
+        } else {
+          button.dataset.explanation = answer.explanation;
+        }
+        
+        button.addEventListener("click", selectAnswer);
+        answerButtonsElement.appendChild(button);
+      });
     }
-    
-    button.addEventListener("click", selectAnswer);
-    answerButtonsElement.appendChild(button);
-  });
-}
 
     function resetState() {
       nextButton.classList.add("hide");
